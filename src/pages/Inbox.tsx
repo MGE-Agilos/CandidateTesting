@@ -69,7 +69,9 @@ export function Inbox({ emails, session, onSessionChange, mode }: InboxProps) {
 
   const sorted = [...visibleEmails].sort((a, b) => {
     const po = { urgent: 0, high: 1, normal: 2 }
-    return po[a.priority] - po[b.priority]
+    const pDiff = po[a.priority] - po[b.priority]
+    if (pDiff !== 0) return pDiff
+    return a.deliverAtMinute - b.deliverAtMinute
   })
 
   function markRead(emailId: string) {
@@ -179,9 +181,14 @@ export function Inbox({ emails, session, onSessionChange, mode }: InboxProps) {
                             {unread && <span className="w-2 h-2 bg-brand-500 rounded-full" />}
                           </div>
                         </div>
-                        <p className={`text-xs truncate ${unread ? 'font-semibold text-gray-800' : 'text-gray-500'}`}>
-                          {email.subject}
-                        </p>
+                        <div className="flex items-center justify-between gap-1">
+                          <p className={`text-xs truncate ${unread ? 'font-semibold text-gray-800' : 'text-gray-500'}`}>
+                            {email.subject}
+                          </p>
+                          <span className="text-[10px] text-gray-400 flex-shrink-0">
+                            {formatTime(session.startedAt + email.deliverAtMinute * 60_000)}
+                          </span>
+                        </div>
                         <div className="flex items-center gap-1 mt-1">
                           <span className={`px-1.5 py-0.5 rounded border text-[10px] font-medium ${CATEGORY_COLORS[email.category]}`}>
                             {t.category[email.category]}

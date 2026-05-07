@@ -359,9 +359,8 @@ export function Inbox({ emails, session, onSessionChange, mode }: InboxProps) {
                   </button>
                 </div>
 
-                {/* Note section — meeting-prep only */}
-                {isMeeting && (
-                  <div className="border-t border-gray-100 pt-4">
+                {/* Note section */}
+                <div className="border-t border-gray-100 pt-4">
                     <div className="flex items-center justify-between mb-3">
                       <div className="flex items-center gap-2 text-sm font-semibold text-gray-700">
                         <StickyNote size={16} className="text-amber-500" />
@@ -408,7 +407,6 @@ export function Inbox({ emails, session, onSessionChange, mode }: InboxProps) {
                       </>
                     )}
                   </div>
-                )}
               </div>
             </>
           ) : (

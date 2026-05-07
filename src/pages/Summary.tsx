@@ -98,7 +98,7 @@ export function Summary({ emails, session, businessCaseName, mode }: SummaryProp
       <div className="no-print bg-white border border-gray-200 rounded-xl px-5 py-3 mb-4 flex gap-6 flex-wrap items-center">
         <Toggle label={t.showEmailContent} checked={showEmailBody} onChange={setShowEmailBody} />
         <Toggle label={t.showReplies} checked={showReplies} onChange={setShowReplies} />
-        {isMeeting && <Toggle label={t.showNotes} checked={showNotes} onChange={setShowNotes} />}
+        <Toggle label={t.showNotes} checked={showNotes} onChange={setShowNotes} />
       </div>
 
       {/* Global note */}
@@ -177,8 +177,8 @@ export function Summary({ emails, session, businessCaseName, mode }: SummaryProp
                   </div>
                 )}
 
-                {/* Notes (meeting-prep only) */}
-                {isMeeting && showNotes && (
+                {/* Notes */}
+                {showNotes && (
                   <div className="px-4 py-3">
                     <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-2">{t.yourNote}</p>
                     {note ? (

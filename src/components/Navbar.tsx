@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom'
-import { Building2, Inbox, FileText } from 'lucide-react'
+import { Building2, Inbox, FileText, RotateCcw } from 'lucide-react'
 import { useLang } from '../i18n/context'
 import { Timer } from './Timer'
 import type { SessionData } from '../store/session'
@@ -8,9 +8,10 @@ interface NavbarProps {
   session: SessionData
   unreadCount: number
   onExpired: () => void
+  onRestart: () => void
 }
 
-export function Navbar({ session, unreadCount, onExpired }: NavbarProps) {
+export function Navbar({ session, unreadCount, onExpired, onRestart }: NavbarProps) {
   const { t } = useLang()
   const loc = useLocation()
 
@@ -56,6 +57,19 @@ export function Navbar({ session, unreadCount, onExpired }: NavbarProps) {
             )
           })}
         </nav>
+
+        <button
+          onClick={() => {
+            if (window.confirm('Nouvelle session ? Toutes les données en cours seront perdues.')) {
+              onRestart()
+            }
+          }}
+          title="Nouvelle session"
+          className="no-print flex items-center gap-1.5 text-xs text-gray-400 hover:text-red-500 hover:bg-red-50 px-2 py-1.5 rounded-md transition-colors"
+        >
+          <RotateCcw size={14} />
+          <span className="hidden sm:inline">Reset</span>
+        </button>
 
         <Timer
           startedAt={session.startedAt}

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { HashRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { LangProvider } from './i18n/context'
-import { loadSession, type SessionData } from './store/session'
+import { loadSession, clearSession, type SessionData } from './store/session'
 import { getBusinessCase } from './data/businessCases'
 import { Start } from './pages/Start'
 import { Company } from './pages/Company'
@@ -73,6 +73,7 @@ export default function App() {
           session={session}
           unreadCount={unreadCount}
           onExpired={() => setExpired(true)}
+          onRestart={() => { clearSession(); setSession(null); setExpired(false) }}
         />
         <main>
           <Routes>

@@ -24,14 +24,14 @@ function formatTime(ts: number): string {
 
 function Toggle({ label, checked, onChange }: { label: string; checked: boolean; onChange: (v: boolean) => void }) {
   return (
-    <label className="flex items-center gap-2 cursor-pointer select-none">
+    <label className="flex items-center gap-3 cursor-pointer select-none">
       <button
         role="switch"
         aria-checked={checked}
         onClick={() => onChange(!checked)}
-        className={`relative w-9 h-5 rounded-full transition-colors ${checked ? 'bg-brand-600' : 'bg-gray-300'}`}
+        className={`relative flex-shrink-0 w-10 h-6 rounded-full transition-colors overflow-hidden ${checked ? 'bg-brand-600' : 'bg-gray-300'}`}
       >
-        <span className={`absolute top-0.5 w-4 h-4 bg-white rounded-full shadow transition-transform ${checked ? 'translate-x-4' : 'translate-x-0.5'}`} />
+        <span className={`absolute top-1 w-4 h-4 bg-white rounded-full shadow transition-transform ${checked ? 'translate-x-5' : 'translate-x-1'}`} />
       </button>
       <span className="text-sm text-gray-700">{label}</span>
     </label>

@@ -47,6 +47,9 @@ export function Start({ onStart }: StartProps) {
       durationMinutes: selectedCase.durationMinutes,
       readEmails: [],
       replies: {},
+      repliedAt: {},
+      notes: {},
+      globalNote: '',
       candidatePriorities: {},
     }
     saveSession(session)
